@@ -1,52 +1,65 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
         <title>Globalgig Test</title>
-        <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.2.js"></script>
-        <script type="text/javascript" src="Chart.js"></script>
-        <script type="text/javascript">
-            var data = [
-                {
-                    value: 300,
-                    color:"#F7464A",
-                    highlight: "#FF5A5E",
-                    label: "Red"
-                },
-                {
-                    value: 50,
-                    color: "#46BFBD",
-                    highlight: "#5AD3D1",
-                    label: "Green"
-                },
-                {
-                    value: 100,
-                    color: "#FDB45C",
-                    highlight: "#FFC870",
-                    label: "Yellow"
-                }
-            ];
-
-            $(document).ready( 
-                function () {
-                    var ctx = document.getElementById("myChart").getContext("2d");
-                    var myNewChart = new Chart(ctx).Pie(data);
-
-                    $("#myChart").click( 
-                        function(evt){
-                            var activePoints = myNewChart.getSegmentsAtEvent(evt);
-                            var url = "http://grousset.com/?label=" + activePoints[0].label + "&value=" + activePoints[0].value;
-                            alert(url);
-                        }
-                    );                  
-                }
-            );
-        </script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+            canvas {
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
+            }
+        </style>
+    
     </head>
     <body>
         <h1>Globalgig Tests</h1>
         <hr/>
         <h2>ChartJS test</h2>
-        <canvas id="myChart" width="400" height="400"></canvas>
+        <hr/>
+        <div style="width: 50%;">
+            <canvas id="chart-area"></canvas>
+        </div>
+        <script>
+            var config = {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: [300, 50, 100],
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                        label: 'Dataset 1'
+                    }],
+                    labels: ['Red', 'Blue', 'Yellow']
+                },
+                options: {
+                    responsive: true,
+                    onClick: graphClickEvent
+                }
+            };
+    
+            var ctx = document.getElementById('chart-area').getContext('2d');
+            var myPieChart = new Chart(ctx, config);
+    
+            function graphClickEvent(event, array) {
+                if (array[0]) {
+                    var activeElementIndex = array[0].index;
+                    var label = config.data.labels[activeElementIndex];
+                    
+                    // Based on the slice clicked, you can change your chart data here
+                    // For this example, we'll just log to the console
+                    console.log('Slice clicked:', label);
+                    
+                    // Here you would define the new data based on the clicked element
+                    var newData = [20, 30, 15]; // Dummy data for drill-down
+    
+                    // Update chart data and re-render
+                    myPieChart.data.datasets[0].data = newData;
+                    myPieChart.update();
+                }
+            }
+        </script>
+    
         <hr/>
         <h2>Lucidchart web integration Test</h2>
         <hr/>
