@@ -46,12 +46,10 @@
                     var activeElementIndex = array[0].index;
                     var label = config.data.labels[activeElementIndex];
                     
-                    // Based on the slice clicked, you can change your chart data here
-                    // For this example, we'll just log to the console
                     console.log('Slice clicked:', label);
                     
-                    // Here you would define the new data based on the clicked element
-                    var newData = [20, 30, 15]; // Dummy data for drill-down
+                     // Change the data with some dummy ones to test drilling concept... 
+                    var newData = [20, 30, 15];
     
                     // Update chart data and re-render
                     myPieChart.data.datasets[0].data = newData;
@@ -63,7 +61,9 @@
         <hr/>
         <h2>Lucidchart web integration Test</h2>
         <hr/>
-        <div style="width: 960px; height: 720px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:960px; height:720px" src="https://lucid.app/documents/embedded/c75a3789-7426-4ae4-a61d-f0e104789734" id="hKOwsyOG44yU"></iframe></div>    
+        <div style="width: 960px; height: 720px; margin: 10px; position: relative;">
+            <iframe allowfullscreen frameborder="0" style="width:960px; height:720px" src="https://lucid.app/documents/embedded/c75a3789-7426-4ae4-a61d-f0e104789734" id="hKOwsyOG44yU"></iframe>
+        </div>    
         <hr/>
     </body>
 </html>
