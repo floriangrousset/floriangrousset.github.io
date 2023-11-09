@@ -1,11 +1,56 @@
 <!DOCTYPE html>
-<head>
-    <title>Globalgig Test</title>
-</head>
-<body>
-<body>
-    <h1>Globalgig Lucid Integration Test</h1>
-    <hr/>
-    <div style="width: 960px; height: 720px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:960px; height:720px" src="https://lucid.app/documents/embedded/c75a3789-7426-4ae4-a61d-f0e104789734" id="hKOwsyOG44yU"></iframe></div>
-</body>
+<html>
+    <head>
+        <title>Globalgig Test</title>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.2.js"></script>
+        <script type="text/javascript" src="Chart.js"></script>
+        <script type="text/javascript">
+            var data = [
+                {
+                    value: 300,
+                    color:"#F7464A",
+                    highlight: "#FF5A5E",
+                    label: "Red"
+                },
+                {
+                    value: 50,
+                    color: "#46BFBD",
+                    highlight: "#5AD3D1",
+                    label: "Green"
+                },
+                {
+                    value: 100,
+                    color: "#FDB45C",
+                    highlight: "#FFC870",
+                    label: "Yellow"
+                }
+            ];
+
+            $(document).ready( 
+                function () {
+                    var ctx = document.getElementById("myChart").getContext("2d");
+                    var myNewChart = new Chart(ctx).Pie(data);
+
+                    $("#myChart").click( 
+                        function(evt){
+                            var activePoints = myNewChart.getSegmentsAtEvent(evt);
+                            var url = "http://grousset.com/?label=" + activePoints[0].label + "&value=" + activePoints[0].value;
+                            alert(url);
+                        }
+                    );                  
+                }
+            );
+        </script>
+    </head>
+    <body>
+        <h1>Globalgig Tests</h1>
+        <hr/>
+        <h2>ChartJS test</h2>
+        <canvas id="myChart" width="400" height="400"></canvas>
+        <hr/>
+        <h2>Lucidchart web integration Test</h2>
+        <hr/>
+        <div style="width: 960px; height: 720px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:960px; height:720px" src="https://lucid.app/documents/embedded/c75a3789-7426-4ae4-a61d-f0e104789734" id="hKOwsyOG44yU"></iframe></div>    
+        <hr/>
+    </body>
 </html>
